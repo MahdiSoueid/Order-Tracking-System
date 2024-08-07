@@ -1,0 +1,180 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="TrackingSystem.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <link href="Content/StyleSheet1.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script>
+    function toggleDetails(stepId) {
+        var detailsPanel = document.getElementById(stepId + "-details");
+        detailsPanel.classList.toggle("show");
+    }
+</script>
+    <style>
+        .custom-header {
+            background-color: #007bff;
+            color: white;
+        }
+            .custom-header img {
+                height: 80px;
+                margin-right: 20px;
+            }
+  .stepper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 50px;
+    width: 100%;
+    position: relative;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    flex: 1;
+    padding: 10px;
+    margin: 10px;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    z-index: 1;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+}
+
+.circle i {
+    font-size: 1.5rem;
+}
+
+.line {
+    position: absolute;
+    height: 4px;
+    z-index: 0;
+    width: 100%;
+    transform: translateX(50%) translateY(25px);
+}
+
+.none-line {
+    background-color: grey;
+    border-style: dashed;
+    border-block-color: white;
+}
+
+.details {
+    display: none;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 15px;
+    margin-top: 10px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.details.show {
+    display: block;
+}
+
+.details::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #f8f9fa;
+    position: absolute;
+    top: -10px;
+    left: calc(50% - 10px);
+}
+
+.details .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.details .card-content strong {
+    color: #007bff;
+    margin-bottom: 5px;
+}
+
+.details .card-content span {
+    color: #6c757d;
+}
+
+.approved {
+    background-color: green !important;
+}
+
+.rejected {
+    background-color: red !important;
+}
+
+.inprogress {
+    background-color: orange !important;
+}
+
+.none {
+    background-color: grey;
+}
+
+    </style>
+    <title>Tracking System</title>
+
+</head>
+<body>  <form id="form1" runat="server">
+          <telerik:RadScriptManager runat="server" ID="RadScriptManager1" />
+<telerik:RadSkinManager ID="RadSkinManager1" runat="server" ShowChooser="false" />
+<telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
+</telerik:RadAjaxLoadingPanel>
+<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server" DefaultLoadingPanelID="RadAjaxLoadingPanel1"
+    UpdatePanelsRenderMode="Inline">
+    <AjaxSettings>
+        <telerik:AjaxSetting AjaxControlID="ConfiguratorPanel1">
+            <UpdatedControls>
+                <telerik:AjaxUpdatedControl ControlID="ConfiguratorPanel1"></telerik:AjaxUpdatedControl>
+                <telerik:AjaxUpdatedControl ControlID="RadGrid1"></telerik:AjaxUpdatedControl>
+            </UpdatedControls>
+        </telerik:AjaxSetting>
+    </AjaxSettings>
+</telerik:RadAjaxManager>
+  
+              
+      <div class="container-fluid custom-header py-2">
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <img src="Content/logo.png" alt="Logo">
+        </div>
+        <div class="col text-center">
+            <h3 class="m-0">Order Tracking System</h3>
+        </div>
+        <div class="col-auto"></div>
+    </div>
+</div> 
+ <asp:ContentPlaceHolder ID="OrdersHolder" runat="server">
+ </asp:ContentPlaceHolder>
+ <asp:ContentPlaceHolder ID="TrackingHolder" runat="server">
+ </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
